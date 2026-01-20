@@ -1,5 +1,5 @@
 # Usa imagem oficial do Java
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 
 # Diretório de trabalho dentro do container
 WORKDIR /app
