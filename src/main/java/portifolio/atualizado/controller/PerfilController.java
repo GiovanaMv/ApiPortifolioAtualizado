@@ -1,19 +1,42 @@
 package portifolio.atualizado.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import portifolio.atualizado.model.Contato;
 import portifolio.atualizado.model.Experiencia;
 import portifolio.atualizado.model.Formacao;
+import portifolio.atualizado.model.Habilidade;
 import portifolio.atualizado.model.Perfil;
 import portifolio.atualizado.model.Sites;
 
 @RestController
 public class PerfilController {
+
+    @GetMapping("/curriculo/tecnologia")
+public ResponseEntity<Resource> baixarTecnologia() throws IOException {
+    Resource resource = new ClassPathResource("pdfs/Giovana Tecnologia.pdf");
+    return ResponseEntity.ok()
+            .header("Content-Type", "application/pdf")
+            .header("Content-Disposition", "attachment; filename=Giovana-Tecnologia.pdf")
+            .body(resource);
+}
+
+@GetMapping("/curriculo/saude")
+    public ResponseEntity<Resource> baixarSaude() throws IOException {
+        Resource resource = new ClassPathResource("pdfs/Giovana Saúde.pdf");
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/pdf")
+                .header("Content-Disposition", "attachment; filename=Giovana-Saúde.pdf")
+                .body(resource);
+    }
 
     @GetMapping("/perfil")
     public Perfil getPerfil() {
@@ -29,7 +52,6 @@ public class PerfilController {
         new Contato(4, "LinkedIn", "https://www.linkedin.com/in/giovana-maia1212")
         );
         perfil.setContatos(contatos);
-
 
         // // Sites e Jogos
         List<Sites> sites = Arrays.asList(
@@ -74,19 +96,21 @@ public class PerfilController {
         perfil.setFormacoesTecnologia(formacoesTecnologia);
 
         // Habilidades Técnicas
-        perfil.setHabilidadesTecnicas(Arrays.asList(
-            "Java", "JavaScript", "HTML5 (semântico)", "CSS3", "SASS",
-            "Spring Boot", "Angular", "React", "Vue.js",
-            "REST / RESTful", "Integração front-end com back-end", "JSON", "Axios / Fetch",
-            "MVC",
-            "Figma", "Canva", "Trello", "Meta Business",
-            "Jest", "Cypress (E2E)", "Playwright",
-            "Git", "GitHub",
-            "SQL",
-            "Docker",
-            "Maven"
-        ));
+        List<Habilidade> habilidades = Arrays.asList(
+            new Habilidade(1, "Linguagens:", Arrays.asList("Java(8/17/21)", "JavaScript", "HTML5 (semântico)", "CSS3", "SASS")),
+            new Habilidade(2, "Frameworks & Libraries:", Arrays.asList("Spring Boot", "Angular", "React", "Vue.js")),
+            new Habilidade(3, "APIs:", Arrays.asList("REST / RESTful", "Integração front-end com back-end", "JSON", "Axios / Fetch")),
+            new Habilidade(4, "Arquitetura e Padrões:", Arrays.asList("MVC")),
+            new Habilidade(5, "Ferramentas & Design:", Arrays.asList("Figma", "Canva", "Trello", "Meta Business")),
+            new Habilidade(6, "Testes:", Arrays.asList("Jest", "Cypress (E2E)", "Playwright")),
+            new Habilidade(7, "Controle de versão:", Arrays.asList("Git", "GitHub")),
+            new Habilidade(8, "Banco de dados:", Arrays.asList("SQL", "PostgreSQL")),
+            new Habilidade(9, "DevOps:", Arrays.asList("Docker", "Maven")),
+            new Habilidade(10, "Deploy & Hosting:", Arrays.asList("Render", "Railway", "Vercel"))
+        );
 
+        perfil.setHabilidadesTecnicas(habilidades);
+        
         return perfil;
     }
 }

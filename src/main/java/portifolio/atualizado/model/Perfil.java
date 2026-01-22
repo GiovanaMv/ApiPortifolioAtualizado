@@ -11,7 +11,7 @@ public class Perfil {
     private List<Experiencia> experienciasTecnologia;
     private List<Formacao> formacoesSaude;
     private List<Formacao> formacoesTecnologia;
-    private List<String> habilidadesTecnicas;
+    private List<Habilidade> habilidadesTecnicas;
     private List<String> jogos;
     
     public String getNome() {
@@ -86,10 +86,10 @@ public class Perfil {
 
     // 
 
-    public List<String> getHabilidadesTecnicas() {
+    public List<Habilidade> getHabilidadesTecnicas() {
         return habilidadesTecnicas;
     }
-    public void setHabilidadesTecnicas(List<String> habilidadesTecnicas){
+    public void setHabilidadesTecnicas(List<Habilidade> habilidadesTecnicas){
         this.habilidadesTecnicas = habilidadesTecnicas;
     }
 
