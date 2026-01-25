@@ -14,9 +14,14 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://portfolio-atualizado-swart.vercel.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        // libera especificamente o seu front no Vercel
+                        .allowedOrigins("https://portifolio-atualizado-swart.vercel.app")
+                        // métodos HTTP permitidos
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        // cabeçalhos permitidos
                         .allowedHeaders("*");
+                        // permite envio de cookies/autenticação se precisar
+                        // .allowCredentials(true);
             }
         };
     }
